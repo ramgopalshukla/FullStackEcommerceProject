@@ -25,7 +25,7 @@ const createProduct = async (req, res) => {
 
 
   const product = await ProductModel.create(req.body);
-  res.status(201).json({
+  res.status(201).send({
     success: true,
     product,
   });
@@ -57,27 +57,20 @@ const getallproducts = (req, res) => {
 
 
 const updateproduct= async ()=>{
-
-  try{
-
-    let Product= await Product.findById(req.params.id);
-
-    if(!Product){
-
-      return res.status(500).send({
+try{
+let Product= await Product.findById(req.params.id);
+if(!Product){
+return res.status(500).send({
         success: false,
         message: "Product not found"
       })
     }
-
-
-    Product= await Product.findByIdAndUpdate(req.params.id, req.body, {
+Product= await Product.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
       useFindAndModify: false
     })
-
-    res.status(200).json({
+ res.status(200).json({
       success: true,
       Product
     })
@@ -86,7 +79,6 @@ const updateproduct= async ()=>{
   catch{
 
   }
-
 }
 
 
