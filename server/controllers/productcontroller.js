@@ -82,4 +82,11 @@ Product= await Product.findByIdAndUpdate(req.params.id, req.body, {
 }
 
 
-module.exports = { getallproducts, createProduct, updateproduct };
+
+const deletevalue=   async(req, res)=>{
+
+       
+      }
+
+
+module.exports = { getallproducts, createProduct, updateproduct, deletevalue };
