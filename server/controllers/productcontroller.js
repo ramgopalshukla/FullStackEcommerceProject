@@ -33,16 +33,16 @@ const createProduct = async (req, res) => {
 
 //  get all products
 
-const getallproducts = (req, res) => {
+const getallproducts = async (req, res) => {
   try {
-    const Products = ProductModel.find();
+    const Products = await ProductModel.find();
     res.status(200).send({
       status: true,
       message: "getting products",
       data: Products,
     });
   } catch (error) {
-    error,
+  
       res.status(500).send({
         status: false,
         message: "not getting products",
@@ -121,4 +121,5 @@ module.exports = {
   createProduct,
   updateproduct,
   deleteProducts,
+  getproductdetails
 };
