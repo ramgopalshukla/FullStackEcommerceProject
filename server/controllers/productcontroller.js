@@ -52,25 +52,32 @@ const getallproducts = (req, res) => {
 };
 
 //  update products
-const updateproduct = async () => {
+const updateproduct = async (req,res) => {
   try {
-    let Product = await Product.findById(req.params.id);
-    if (!Product) {
+    let product = await ProductModel.findById(req.params.id);
+    if (!product) {
       return res.status(500).send({
         success: false,
         message: "Product not found",
       });
     }
-    Product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    product = await ProductModel.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
       useFindAndModify: false,
     });
     res.status(200).json({
       success: true,
-      Product,
+      product,
     });
-  } catch {}
+  } catch(error) {
+        res.status(500).json({
+          success: false,
+          message: "something went wrong"
+
+
+        })
+  }
 };
 
 //  Delete Products
@@ -99,7 +106,7 @@ const getproductdetails = async (req, res, next) => {
   if (!product) {
     return res.status(500).send({
       success: false,
-      message: "Product not found",
+      message: "Product not found"
     });
   }
 
